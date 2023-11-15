@@ -3,7 +3,7 @@ import socket
 
 
 def send_command(command, data):
-    server_address = ('localhost', 10024)
+    server_address = ('localhost', 10025)
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
     try:
@@ -46,6 +46,9 @@ def main():
             brand = input("Enter brand: ")
             model = input("Enter model: ")
             cost = input("Enter cost: ")
+            while not (cost.isdigit() and int(cost) >= 0):
+                print("Invalid cost. Please enter a non-negative number.")
+                cost = input("Enter cost: ")
             send_command(user_input, f"{key},{brand},{model},{cost}")
 
         else:

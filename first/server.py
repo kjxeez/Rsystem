@@ -28,6 +28,7 @@ def handle_command(command, *params):
 
     elif command == '+':
         key, brand, model, cost = params
+
         car_data[key] = {"brand": brand, "model": model, "cost": int(cost)}
         response = "Record added successfully."
 
@@ -39,7 +40,7 @@ def handle_command(command, *params):
 
 
 def main():
-    server_address = ('localhost', 10024)
+    server_address = ('localhost', 10025)
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.bind(server_address)
 
