@@ -2,7 +2,7 @@ import pickle
 import socket
 
 def send_command(command, data):
-    server_address = ('localhost', 10016)
+    server_address = ('localhost', 10021)
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
     try:
@@ -19,19 +19,22 @@ def send_command(command, data):
 def main():
     while True:
         print("Available commands:")
-        print("1. Delete record (Command: delete)")
+        print("1. Delete record (Command: -)")
         print("2. Count records (Command: count)")
         print("3. Generate report (Command: report)")
-        print("4. Exit (Command: exit)")
+        print("4. Exit (Command: q)")
 
         user_input = input("Enter command: ").lower()
 
-        if user_input == 'exit':
+        if user_input == 'q':
             break
 
-        elif user_input in ['delete', 'count']:
+        elif user_input == '-':
             key = input("Enter record key: ")
             send_command(user_input, key)
+
+        elif user_input == 'n':
+            send_command(user_input, '')
 
         elif user_input == 'report':
             send_command(user_input, '')
@@ -41,3 +44,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
