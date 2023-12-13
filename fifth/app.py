@@ -33,10 +33,13 @@ def init_data():
 def index():
     if request.method == 'POST':
         search_birthday = request.form.get('search_birthday')
+        filter_by_name = request.form.get('filter_by_name')
         if search_birthday:
             employees = session.query(Employee).filter_by(birthday=search_birthday).all()
             return render_template('index.html', num_employees=len(employees), employees=employees)
-
+        if filter_by_name:
+            employees = session.query(Employee).filter(Employee.name.startswith(filter_by_name)).all()
+            return render_template('index.html', num_employees=len(employees), employees=employees)
         if 'sort_by_position' in request.form:
             employees = session.query(Employee).order_by(Employee.position).all()
             return render_template('index.html', num_employees=len(employees), employees=employees)

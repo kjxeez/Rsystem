@@ -34,7 +34,11 @@
         <input type="text" name="search_birthday">
         <button type="submit" name="search">Search</button>
     </form>
-
+<form method="POST" action="{{ url_for('index') }}">
+    <label for="filter_by_name">Filter by Name:</label>
+    <input type="text" name="filter_by_name">
+    <button type="submit" name="filter">Filter</button>
+</form>
     <!-- Таблица с существующими записями -->
     <table border="1">
         <tr>
@@ -67,12 +71,8 @@
         </tr>
         {% endfor %}
     </table>
-<!-- Форма для сортировки по должности -->
-<!-- Форма для сортировки по должности -->
-<!-- Форма для сортировки по должности -->
-    <form method="POST" action="{{ url_for('index') }}">
-        <button type="submit" name="sort_by_position">Sort by Position</button>
-    </form>
+
+
 
     <!-- Ссылка для включения/отключения сортировки по должности -->
     {% if request.args.get('sort') == 'position' %}
