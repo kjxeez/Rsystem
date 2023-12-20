@@ -1,14 +1,14 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request
 from engine import *
 import pandas as pd
 import random
+
 app = Flask(__name__)
 
 gamers = 5
-probs = []
-for i in range(2, gamers + 1):
-    probs.append(1 / (i * i))
-probs.insert(0, 1 - sum(probs))
+probs = [1/7, 2/7, 1/7, 2/7, 1/7]
+
+
 rounds = 20
 blockchain = Blockchain()
 accs = [20] * gamers
@@ -28,24 +28,22 @@ def Game_start(probs, blockchain, game_round=1, number=4):
         for i in range(len(accs)):
             c_accs = accs
             c_accs.sort()
-            min1 = c_accs[0]
-            min2 = c_accs[1]
+            min = c_accs[0]
             if accs[i] != 0:
                 if i == winner:
 
-                    blockchain.new_transaction("Gamer_" + str(winner), "Gamer_" + str(accs.index(min1)), 1)
+                    blockchain.new_transaction("Gamer_" + str(winner), "Gamer_" + str(accs.index(min)), 1)
                     total_of_trans = total_of_trans + 1
                     if total_of_trans == 5:
                         mine(blockchain)
                         total_of_trans = 0
-                    blockchain.new_transaction("Gamer_" + str(winner), "Gamer_" + str(accs.index(min2)), 1)
                     total_of_trans = total_of_trans + 1
                     if total_of_trans == 5:
                         mine(blockchain)
                         total_of_trans = 0
 
-                    accs[accs.index(min1)] = accs[accs.index(min1)] + 1;
-                    accs[accs.index(min2)] = accs[accs.index(min2)] + 1;
+                    accs[accs.index(min)] = accs[accs.index(min)] + 2
+
                     total[winner] = total[winner] - 2
                     accs[winner] = accs[winner] - 2
                     accs[winner] = accs[winner] + active - 1
