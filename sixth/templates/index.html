@@ -1,0 +1,35 @@
+<html>
+<body>
+<h1>Модель игры</h1>
+<h2>Игроков: {{gamers}}</h2>
+<h3>Вероятности:</h3>
+<ol>
+    {% for p in probs %}
+    <li> {{p}} </li>
+    {% endfor %}
+</ol>
+
+<a href="{{url_for('MainPageGame')}}">
+    <button>Играть в игру</button>
+</a>
+<a href="{{url_for('GameLog')}}">
+    <button>Показать итоги раундов</button>
+</a>
+<a href="{{url_for('MakeBlockchain')}}">
+    <button>Сформировать блокчейн</button>
+</a>
+
+</a>
+<a href="{{url_for('TransPage')}}">
+    <button>Показать историю транзакций</button>
+</a>
+
+<br><br>
+{{ accs | safe }}
+<br><br>
+{{lb}}
+
+
+
+</body>
+</html>

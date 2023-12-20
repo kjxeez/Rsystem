@@ -1,0 +1,15 @@
+<html>
+<body>
+<h1>История по раундам</h1>
+<ol>
+    {% for p in log %}
+    <li> {{p}} </li>
+    {% endfor %}
+</ol>
+
+<a href="{{url_for('MainPage')}}">
+    <button>Главная стр</button>
+</a>
+
+</body>
+</html>
